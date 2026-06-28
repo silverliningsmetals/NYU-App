@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grad School Blueprint — Your Application Command Center</title>
+<meta name="description" content="Build a free, private command center for every grad school application — deadlines, tasks, essay drafts with version history, and attachments. Everything stays in your browser.">
+<style>
+:root { color-scheme: light;
+  --ink:#16203a; --navy:#1d2d5c; --navy2:#33498f; --gold:#c9a227; --bg:#f5f6fa;
+  --card:#fff; --mut:#6a7287; --line:#e4e7f0; --ok:#2f9e44; --warn:#e8590c; --soon:#f0a500;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.5; padding:18px; max-width:1150px; margin:0 auto; }
+header.top { background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%); color:#fff; border-radius:16px; padding:22px 26px; margin-bottom:14px; box-shadow:0 4px 18px rgba(29,45,92,.25); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; align-items:center; }
+header.top h1 { font-size:21px; font-weight:800; letter-spacing:-.3px; }
+header.top h1 .bp { color:var(--gold); }
+header.top .sub { opacity:.85; font-size:12.5px; margin-top:4px; }
+.hbtns { display:flex; gap:8px; flex-wrap:wrap; }
+.btn { border:none; background:var(--navy); color:#fff; padding:8px 15px; border-radius:9px; font-size:13px; font-weight:600; cursor:pointer; }
+.btn.gold { background:var(--gold); color:#1d2d5c; }
+.btn.ghost { background:#eceef6; color:var(--navy); }
+.btn.danger { background:#fbe9e9; color:#c92a2a; }
+.btn.sm { padding:5px 10px; font-size:12px; }
+.schoolbar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+.schoolbar button.school { border:1px solid var(--line); background:#fff; padding:9px 16px; border-radius:10px; font-size:13.5px; font-weight:700; cursor:pointer; color:var(--mut); box-shadow:0 1px 4px rgba(0,0,0,.05); }
+.schoolbar button.school.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+nav.tabs { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+nav.tabs button { border:none; background:#fff; padding:9px 16px; border-radius:9px; font-size:13px; font-weight:600; color:var(--mut); cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+nav.tabs button.active { background:var(--gold); color:var(--navy); }
+.grid { display:grid; gap:14px; }
+.countdowns { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); margin-bottom:14px; }
+.cd { background:var(--card); border-radius:13px; padding:14px; text-align:center; box-shadow:0 1px 4px rgba(0,0,0,.06); border-top:4px solid #ccc; position:relative; }
+.cd.hero{border-top-color:var(--navy);} .cd.warn{border-top-color:var(--warn);} .cd.soon{border-top-color:var(--soon);} .cd.done-cd{border-top-color:var(--ok);}
+.cd .label{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--mut);font-weight:700;}
+.cd .num{font-size:32px;font-weight:800;line-height:1.1;margin:5px 0 1px;}
+.cd .unit{font-size:11px;color:var(--mut);}
+.cd .date{font-size:12px;margin-top:5px;font-weight:600;}
+.cd .passed{color:var(--ok);font-weight:700;font-size:13px;}
+.cd .x{position:absolute;top:6px;right:9px;color:#c5c9d6;cursor:pointer;font-size:13px;border:none;background:none;}
+.section { background:var(--card); border-radius:13px; padding:18px 20px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.section h2 { font-size:15.5px; font-weight:800; margin-bottom:3px; color:var(--navy); }
+.section .hint { font-size:12.5px; color:var(--mut); margin-bottom:12px; }
+.progwrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.progbar-outer{flex:1;min-width:200px;height:13px;background:#eceef6;border-radius:8px;overflow:hidden;}
+.progbar-inner{height:100%;background:linear-gradient(90deg,var(--navy),var(--gold));width:0;transition:width .5s;}
+.progtxt{font-size:13.5px;font-weight:800;color:var(--navy);white-space:nowrap;}
+ul.tasks{list-style:none;}
+li.task{display:flex;align-items:flex-start;gap:10px;padding:8px 6px;border-radius:8px;}
+li.task:hover{background:#f7f8fc;}
+li.task .box{width:18px;height:18px;border:2px solid #b9bfd0;border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;cursor:pointer;}
+li.task.done .box{background:var(--ok);border-color:var(--ok);}
+li.task .txt{font-size:13.5px;flex:1;}
+li.task.done .txt{text-decoration:line-through;color:#a3a9ba;}
+li.task .due{font-size:11px;color:var(--warn);font-weight:700;margin-left:6px;}
+li.task .x{border:none;background:none;color:#c5c9d6;cursor:pointer;font-size:13px;}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.addrow input,.addrow select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;}
+.addrow input[type=text]{flex:1;min-width:160px;}
+.evlist{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.evlist button{border:1px solid var(--line);background:#f7f8fc;padding:8px 13px;border-radius:9px;font-size:12.5px;font-weight:700;color:var(--navy);cursor:pointer;}
+.evlist button.active{background:var(--navy);color:#fff;}
+.evlist button .x{margin-left:6px;color:inherit;opacity:.6;}
+.wc{font-size:13px;font-weight:800;} .wc.ok{color:var(--ok);} .wc.over{color:#c92a2a;}
+textarea.draft{width:100%;min-height:300px;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:14px;font-family:Georgia,serif;line-height:1.65;resize:vertical;background:#fffdf8;}
+textarea.draft:focus{outline:2px solid var(--gold);}
+.evbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:10px 0;}
+.statuschip select{border:1px solid var(--line);border-radius:7px;padding:5px 8px;font-size:12.5px;color:var(--navy);font-weight:700;background:#fff;}
+.versions{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;}
+.versions h3{font-size:13px;color:var(--navy);margin-bottom:8px;}
+.ver{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:8px;background:#f7f8fc;margin-bottom:6px;font-size:12.5px;flex-wrap:wrap;gap:6px;}
+.ver .vmeta{color:var(--mut);}
+.ver button{border:none;background:none;color:var(--navy);font-weight:700;cursor:pointer;font-size:12px;text-decoration:underline;}
+.savedflash{font-size:12px;color:var(--ok);font-weight:800;}
+.rubric{background:#f2f4fb;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:10px;padding:13px 15px;margin-bottom:12px;}
+.rubric .rlabel{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:800;margin-bottom:4px;}
+.rubric .rprompt{font-size:13.5px;font-style:italic;color:var(--ink);white-space:pre-wrap;}
+.rubric .redit{border:none;background:none;color:var(--navy);font-weight:700;cursor:pointer;font-size:11.5px;text-decoration:underline;margin-top:6px;padding:0;}
+.files{list-style:none;}
+.files li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;background:#f7f8fc;margin-bottom:6px;font-size:13px;flex-wrap:wrap;}
+.files li .fmeta{color:var(--mut);font-size:11.5px;}
+.files li a{color:var(--navy);font-weight:700;}
+.drop{border:2px dashed #c9cfdf;border-radius:12px;padding:22px;text-align:center;color:var(--mut);font-size:13px;cursor:pointer;margin-bottom:12px;}
+.drop.over{border-color:var(--gold);background:#fffaf0;}
+.empty{padding:18px;text-align:center;color:var(--mut);font-size:13.5px;}
+footer{text-align:center;font-size:11.5px;color:#a3a9ba;padding:12px 0 4px;}
+dialog{border:none;border-radius:14px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.25);max-width:420px;width:92%;}
+dialog::backdrop{background:rgba(22,32,58,.45);}
+dialog h3{color:var(--navy);margin-bottom:12px;font-size:16px;}
+dialog label{font-size:12.5px;font-weight:700;color:var(--mut);display:block;margin:10px 0 4px;}
+dialog input{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:13.5px;}
+dialog .dbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+.privacy{background:#eef3ec;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;font-size:12.5px;margin-bottom:14px;color:#33502f;}
+@media (max-width:640px){ body{padding:10px;} header.top{padding:16px;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <h1>GRAD SCHOOL <span class="bp">BLUEPRINT</span></h1>
+    <div class="sub">Your private application command center — deadlines, tasks, essay drafts &amp; files for every school.</div>
+  </div>
+  <div class="hbtns">
+    <button class="btn gold" id="addschool">+ Add school</button>
+    <button class="btn ghost" id="exportbtn">Export backup</button>
+    <button class="btn ghost" id="importbtn">Import</button>
+    <input type="file" id="importfile" accept=".json" style="display:none">
+  </div>
+</header>
+
+<div class="privacy">🔒 <b>Everything stays on your device.</b> Drafts, deadlines, and attachments are stored in your own browser — nothing is uploaded anywhere. Use <b>Export backup</b> regularly to save a copy you can restore on any device.</div>
+
+<div class="schoolbar" id="schoolbar"></div>
+
+<div id="app" style="display:none;">
+<nav class="tabs">
+  <button data-tab="dash" class="active">📊 Dashboard</button>
+  <button data-tab="essays">✍️ Essays</button>
+  <button data-tab="files">📎 Attachments</button>
+</nav>
+
+<div id="tab-dash">
+  <div class="grid countdowns" id="countdowns"></div>
+  <div class="section">
+    <h2>Add a deadline</h2>
+    <div class="addrow">
+      <input type="text" id="ddlabel" placeholder="e.g., Round 1 submission, Recommender packet sent…">
+      <input type="date" id="dddate">
+      <label style="font-size:12px;color:var(--mut);display:flex;align-items:center;gap:5px;"><input type="checkbox" id="ddhero" style="width:auto;"> primary</label>
+      <button class="btn sm" id="ddadd">Add</button>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Progress</h2>
+    <div class="progwrap">
+      <div class="progbar-outer"><div class="progbar-inner" id="progbar"></div></div>
+      <div class="progtxt" id="progtxt">0%</div>
+    </div>
+  </div>
+  <div class="section">
+    <h2>✅ Tasks</h2>
+    <div class="hint">Check things off as you go. Deadlined tasks show a live day count.</div>
+    <ul class="tasks" id="tasklist"></ul>
+    <div class="addrow">
+      <input type="text" id="ntask" placeholder="New task…">
+      <input type="date" id="ntaskdue" title="Optional due date">
+      <button class="btn sm" id="ntaskadd">Add task</button>
+      <button class="btn sm ghost" id="seedtasks">Load starter checklist</button>
+    </div>
+  </div>
+</div>
+
+<div id="tab-essays" style="display:none;">
+  <div class="section">
+    <h2>✍️ Essay drafts</h2>
+    <div class="hint">Live word count against each essay's limit, with full version history. Hit <b>Save version</b> to snapshot — no draft is ever lost.</div>
+    <div class="evlist" id="evlist"></div>
+    <div class="addrow" style="margin-bottom:12px;">
+      <input type="text" id="nessay" placeholder="New essay name, e.g., Personal Statement">
+      <input type="number" id="nessaylimit" placeholder="Word limit" style="width:110px;" min="1">
+      <input type="text" id="nessayprompt" placeholder="Paste the school's exact prompt (optional — shown above your draft)">
+      <button class="btn sm" id="nessayadd">Add essay</button>
+    </div>
+    <div id="evpane" style="display:none;">
+      <div class="evbar">
+        <div><span style="font-size:14px;font-weight:800;" id="evtitle"></span> &nbsp; <span class="wc" id="evwc"></span></div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <span class="statuschip"><select id="evstatus"><option>Draft</option><option>In review</option><option>FINAL</option></select></span>
+          <button class="btn sm" id="evsave">💾 Save version</button>
+          <button class="btn sm ghost" id="evcopy">Copy</button>
+          <span class="savedflash" id="evflash"></span>
+        </div>
+      </div>
+      <div class="rubric" id="evrubric"></div>
+      <textarea class="draft" id="evtext" spellcheck="true" placeholder="Write or paste your draft here…"></textarea>
+      <div class="versions"><h3>Version history</h3><div id="evvers"></div></div>
+    </div>
+    <div class="empty" id="evempty">Add your first essay above to start drafting.</div>
+  </div>
+</div>
+
+<div id="tab-files" style="display:none;">
+  <div class="section">
+    <h2>📎 Attachments</h2>
+    <div class="hint">Keep résumés, transcripts, photos, and recommender packets with the application they belong to. Files are stored in your browser (IndexedDB) and included in Export backup.</div>
+    <div class="drop" id="drop">Drop files here or click to choose</div>
+    <input type="file" id="filein" multiple style="display:none">
+    <ul class="files" id="filelist"></ul>
+  </div>
+</div>
+</div>
+
+<div class="empty section" id="noschool">👋 Welcome! Click <b>+ Add school</b> to build your first application command center.</div>
+
+<dialog id="schooldlg">
+  <h3>Add a school</h3>
+  <label>School / program</label>
+  <input type="text" id="sname" placeholder="e.g., NYU Stern MBA">
+  <label>Application round or cycle (optional)</label>
+  <input type="text" id="sround" placeholder="e.g., Round 1, Fall 2027">
+  <label>Primary deadline (optional)</label>
+  <input type="date" id="sdate">
+  <div class="dbtns">
+    <button class="btn ghost" id="scancel">Cancel</button>
+    <button class="btn gold" id="screate">Create</button>
+  </div>
+</dialog>
+
+<footer>Grad School Blueprint · free forever · your data never leaves your browser · gradschoolblueprint.netlify.app</footer>
+
+<script>
+"use strict";
+const MS_DAY=86400000;
+const today=new Date(); today.setHours(0,0,0,0);
+const daysTo=s=>{const d=new Date(s+"T00:00:00");d.setHours(0,0,0,0);return Math.round((d-today)/MS_DAY);};
+const fmt=s=>new Date(s+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid=()=>Math.random().toString(36).slice(2,10);
+const wcount=t=>(t.trim().match(/\S+/g)||[]).length;
+
+// ---------- state (localStorage) ----------
+const STORE="gsb_v1";
+let state={schools:[],active:null};
+try{const s=JSON.parse(localStorage.getItem(STORE)||"null"); if(s&&Array.isArray(s.schools)) state=s;}catch(e){}
+const save=()=>{try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){alert("Storage full — export a backup and remove large items.");}};
+const school=()=>state.schools.find(s=>s.id===state.active);
+
+// ---------- IndexedDB for attachments ----------
+let db=null;
+const dbReady=new Promise((res)=>{
+  const rq=indexedDB.open("gsb_files",1);
+  rq.onupgradeneeded=e=>{e.target.result.createObjectStore("files",{keyPath:"id"});};
+  rq.onsuccess=e=>{db=e.target.result;res();};
+  rq.onerror=()=>res();
+});
+const idbPut=rec=>new Promise((res,rej)=>{if(!db)return rej("no db");const t=db.transaction("files","readwrite");t.objectStore("files").put(rec);t.oncomplete=res;t.onerror=rej;});
+const idbGet=id=>new Promise((res,rej)=>{if(!db)return rej("no db");const r=db.transaction("files").objectStore("files").get(id);r.onsuccess=()=>res(r.result);r.onerror=rej;});
+const idbDel=id=>new Promise((res,rej)=>{if(!db)return rej("no db");const t=db.transaction("files","readwrite");t.objectStore("files").delete(id);t.oncomplete=res;t.onerror=rej;});
+const idbAll=()=>new Promise((res,rej)=>{if(!db)return res([]);const r=db.transaction("files").objectStore("files").getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=rej;});
+
+// ---------- school bar ----------
+function renderSchools(){
+  const bar=document.getElementById("schoolbar"); bar.innerHTML="";
+  state.schools.forEach(s=>{
+    bar.insertAdjacentHTML("beforeend",`<button class="school ${s.id===state.active?"active":""}" data-id="${s.id}">🎓 ${esc(s.name)}</button>`);
+  });
+  if(state.schools.length && state.active){
+    bar.insertAdjacentHTML("beforeend",`<button class="btn sm danger" id="delschool">Remove school</button>`);
+    const d=document.getElementById("delschool");
+    d.addEventListener("click",async()=>{
+      const sc=school(); if(!sc) return;
+      if(!confirm(`Remove ${sc.name} and all its data (including attachments)?`)) return;
+      for(const f of sc.files){ try{await idbDel(f.id);}catch(e){} }
+      state.schools=state.schools.filter(x=>x.id!==sc.id);
+      state.active=state.schools.length?state.schools[0].id:null;
+      save(); renderAll();
+    });
+  }
+  bar.querySelectorAll("button.school").forEach(b=>b.addEventListener("click",()=>{state.active=b.dataset.id;save();renderAll();}));
+  document.getElementById("app").style.display=state.active?"":"none";
+  document.getElementById("noschool").style.display=state.active?"none":"";
+}
+
+// ---------- dashboard ----------
+function renderDash(){
+  const sc=school(); if(!sc) return;
+  const cw=document.getElementById("countdowns"); cw.innerHTML="";
+  if(!sc.deadlines.length) cw.innerHTML='<div class="empty section" style="grid-column:1/-1;">Add your first deadline below — submission date, recommender packets, test dates…</div>';
+  sc.deadlines.slice().sort((a,b)=>a.date<b.date?-1:1).forEach(m=>{
+    const n=daysTo(m.date);
+    const cls=m.hero?"hero":(n<0?"done-cd":n<=14?"warn":n<=45?"soon":"");
+    const inner=n<0?`<div class="num passed">✓</div><div class="passed">Date passed</div>`:`<div class="num">${n}</div><div class="unit">day${n===1?"":"s"} left</div>`;
+    cw.insertAdjacentHTML("beforeend",`<div class="cd ${cls}"><button class="x" data-id="${m.id}" title="Remove">✕</button><div class="label">${esc(m.label)}</div>${inner}<div class="date">${fmt(m.date)}</div></div>`);
+  });
+  cw.querySelectorAll(".x").forEach(b=>b.addEventListener("click",()=>{sc.deadlines=sc.deadlines.filter(d=>d.id!==b.dataset.id);save();renderDash();}));
+
+  const tw=document.getElementById("tasklist"); tw.innerHTML="";
+  if(!sc.tasks.length) tw.innerHTML='<div class="empty">No tasks yet — add one below or load the starter checklist.</div>';
+  sc.tasks.forEach(t=>{
+    let due="";
+    if(t.due&&!t.done){const n=daysTo(t.due); due=n>=0?`<span class="due">${n}d · ${fmt(t.due)}</span>`:`<span class="due" style="color:#c92a2a">OVERDUE · ${fmt(t.due)}</span>`;}
+    tw.insertAdjacentHTML("beforeend",`<li class="task ${t.done?"done":""}" data-id="${t.id}"><div class="box">${t.done?"✓":""}</div><div class="txt">${esc(t.t)}${due}</div><button class="x" title="Delete">✕</button></li>`);
+  });
+  tw.querySelectorAll("li.task").forEach(li=>{
+    li.querySelector(".box").addEventListener("click",()=>{const t=sc.tasks.find(x=>x.id===li.dataset.id);t.done=!t.done;save();renderDash();});
+    li.querySelector(".x").addEventListener("click",()=>{sc.tasks=sc.tasks.filter(x=>x.id!==li.dataset.id);save();renderDash();});
+  });
+  const total=sc.tasks.length, done=sc.tasks.filter(t=>t.done).length, pct=total?Math.round(done/total*100):0;
+  document.getElementById("progbar").style.width=pct+"%";
+  document.getElementById("progtxt").textContent=`${pct}% (${done}/${total})`;
+}
+document.getElementById("ddadd").addEventListener("click",()=>{
+  const sc=school(); const l=document.getElementById("ddlabel").value.trim(), d=document.getElementById("dddate").value;
+  if(!sc||!l||!d) return;
+  sc.deadlines.push({id:uid(),label:l,date:d,hero:document.getElementById("ddhero").checked});
+  document.getElementById("ddlabel").value="";document.getElementById("dddate").value="";document.getElementById("ddhero").checked=false;
+  save();renderDash();
+});
+document.getElementById("ntaskadd").addEventListener("click",()=>{
+  const sc=school(); const t=document.getElementById("ntask").value.trim();
+  if(!sc||!t) return;
+  sc.tasks.push({id:uid(),t,done:false,due:document.getElementById("ntaskdue").value||null});
+  document.getElementById("ntask").value="";document.getElementById("ntaskdue").value="";
+  save();renderDash();
+});
+document.getElementById("seedtasks").addEventListener("click",()=>{
+  const sc=school(); if(!sc) return;
+  ["Research program & confirm deadlines","Order official transcripts","Update résumé / CV","Identify & brief recommenders","Draft primary essay","Second draft after feedback","Request test waiver OR register for test","Assemble supporting documents","Full application proofread","SUBMIT application"].forEach(t=>sc.tasks.push({id:uid(),t,done:false,due:null}));
+  save();renderDash();
+});
+
+// ---------- essays ----------
+let curEssay=null;
+function renderEssays(){
+  const sc=school(); if(!sc) return;
+  const w=document.getElementById("evlist"); w.innerHTML="";
+  sc.essays.forEach(e=>{
+    const st=e.status==="FINAL"?" ✅":"";
+    w.insertAdjacentHTML("beforeend",`<button data-id="${e.id}" class="${e.id===curEssay?"active":""}">${esc(e.title)}${st} <span style="opacity:.7">(${wcount(e.text)}/${e.limit})</span><span class="x" data-del="${e.id}" title="Delete essay">✕</span></button>`);
+  });
+  w.querySelectorAll("button").forEach(b=>b.addEventListener("click",ev=>{
+    const del=ev.target.dataset&&ev.target.dataset.del;
+    if(del){ if(confirm("Delete this essay and its history?")){sc.essays=sc.essays.filter(x=>x.id!==del); if(curEssay===del)curEssay=null; save();renderEssays();} return; }
+    curEssay=b.dataset.id; renderEssays();
+  }));
+  const pane=document.getElementById("evpane"), empty=document.getElementById("evempty");
+  if(!sc.essays.length){pane.style.display="none";empty.style.display="";return;}
+  if(!curEssay||!sc.essays.find(e=>e.id===curEssay)) curEssay=sc.essays[0].id;
+  empty.style.display="none";pane.style.display="";
+  const e=sc.essays.find(x=>x.id===curEssay);
+  document.getElementById("evtitle").textContent=e.title;
+  const rb=document.getElementById("evrubric");
+  rb.innerHTML = `<div class="rlabel">What admissions is asking</div><div class="rprompt">${e.prompt?esc(e.prompt):"<span style='color:var(--mut)'>No prompt saved yet — add the school's exact essay question so you're always writing against it.</span>"}</div><button class="redit" id="reditbtn">${e.prompt?"Edit prompt":"Add prompt"}</button>`;
+  rb.querySelector("#reditbtn").addEventListener("click",()=>{
+    const p=window.prompt("Paste the school's exact essay prompt:", e.prompt||"");
+    if(p!==null){ e.prompt=p.trim(); save(); renderEssays(); }
+  });
+  const ta=document.getElementById("evtext");
+  if(ta.value!==e.text) ta.value=e.text;
+  document.getElementById("evstatus").value=e.status;
+  updateWC();
+  const vw=document.getElementById("evvers"); vw.innerHTML="";
+  if(!e.versions.length) vw.innerHTML='<div class="ver"><span class="vmeta">No saved versions yet — hit "Save version" to snapshot.</span></div>';
+  e.versions.slice().reverse().forEach((ver,ri)=>{
+    const i=e.versions.length-1-ri;
+    vw.insertAdjacentHTML("beforeend",`<div class="ver"><span class="vmeta"><b>v${i+1}</b> · ${new Date(ver.ts).toLocaleString("en-US",{dateStyle:"medium",timeStyle:"short"})} · ${wcount(ver.text)} words</span><span><button data-i="${i}" class="vrestore">Restore</button> <button data-i="${i}" class="vdel">Delete</button></span></div>`);
+  });
+  vw.querySelectorAll(".vrestore").forEach(b=>b.addEventListener("click",()=>{e.text=e.versions[+b.dataset.i].text;save();renderEssays();}));
+  vw.querySelectorAll(".vdel").forEach(b=>b.addEventListener("click",()=>{e.versions.splice(+b.dataset.i,1);save();renderEssays();}));
+}
+function updateWC(){
+  const sc=school(); if(!sc||!curEssay) return;
+  const e=sc.essays.find(x=>x.id===curEssay); if(!e) return;
+  const n=wcount(document.getElementById("evtext").value);
+  const el=document.getElementById("evwc");
+  el.textContent=`${n} / ${e.limit} words`;
+  el.className="wc "+(n<=e.limit?"ok":"over");
+}
+document.getElementById("nessayadd").addEventListener("click",()=>{
+  const sc=school(); const t=document.getElementById("nessay").value.trim(), l=parseInt(document.getElementById("nessaylimit").value,10);
+  if(!sc||!t||!l) return;
+  const id=uid();
+  sc.essays.push({id,title:t,limit:l,prompt:document.getElementById("nessayprompt").value.trim(),text:"",status:"Draft",versions:[]});
+  curEssay=id;
+  document.getElementById("nessay").value="";document.getElementById("nessaylimit").value="";document.getElementById("nessayprompt").value="";
+  save();renderEssays();
+});
+document.getElementById("evtext").addEventListener("input",()=>{
+  const sc=school(); const e=sc&&sc.essays.find(x=>x.id===curEssay); if(!e) return;
+  e.text=document.getElementById("evtext").value; save(); updateWC();
+});
+document.getElementById("evstatus").addEventListener("change",ev=>{
+  const sc=school(); const e=sc&&sc.essays.find(x=>x.id===curEssay); if(!e) return;
+  e.status=ev.target.value; save(); renderEssays();
+});
+document.getElementById("evsave").addEventListener("click",()=>{
+  const sc=school(); const e=sc&&sc.essays.find(x=>x.id===curEssay); if(!e) return;
+  e.versions.push({ts:Date.now(),text:e.text}); save(); renderEssays();
+  const f=document.getElementById("evflash"); f.textContent="Saved ✓"; setTimeout(()=>f.textContent="",1800);
+});
+document.getElementById("evcopy").addEventListener("click",()=>{
+  const sc=school(); const e=sc&&sc.essays.find(x=>x.id===curEssay); if(!e) return;
+  if(navigator.clipboard) navigator.clipboard.writeText(e.text);
+  const f=document.getElementById("evflash"); f.textContent="Copied ✓"; setTimeout(()=>f.textContent="",1800);
+});
+
+// ---------- attachments ----------
+async function addFiles(list){
+  const sc=school(); if(!sc) return;
+  await dbReady;
+  for(const file of list){
+    if(file.size>25*1024*1024){alert(file.name+" is over 25 MB — too large for browser storage.");continue;}
+    const id=uid();
+    const buf=await file.arrayBuffer();
+    try{ await idbPut({id,name:file.name,type:file.type,size:file.size,ts:Date.now(),blob:new Blob([buf],{type:file.type})}); }
+    catch(e){ alert("Could not store "+file.name); continue; }
+    sc.files.push({id,name:file.name,size:file.size,ts:Date.now()});
+  }
+  save(); renderFiles();
+}
+function fmtSize(b){return b>1048576?(b/1048576).toFixed(1)+" MB":Math.max(1,Math.round(b/1024))+" KB";}
+async function renderFiles(){
+  const sc=school(); if(!sc) return;
+  const w=document.getElementById("filelist"); w.innerHTML="";
+  if(!sc.files.length){w.innerHTML='<div class="empty">No attachments yet for this school.</div>';return;}
+  sc.files.forEach(f=>{
+    w.insertAdjacentHTML("beforeend",`<li><span>📄 <b>${esc(f.name)}</b> <span class="fmeta">${fmtSize(f.size)} · ${new Date(f.ts).toLocaleDateString()}</span></span><span><a href="#" data-dl="${f.id}">Download</a> &nbsp; <button class="x" data-del="${f.id}" style="border:none;background:none;color:#c92a2a;cursor:pointer;">✕</button></span></li>`);
+  });
+  w.querySelectorAll("a[data-dl]").forEach(a=>a.addEventListener("click",async ev=>{
+    ev.preventDefault(); await dbReady;
+    const rec=await idbGet(a.dataset.dl).catch(()=>null);
+    if(!rec){alert("File not found in this browser's storage.");return;}
+    const url=URL.createObjectURL(rec.blob);
+    const x=document.createElement("a"); x.href=url; x.download=rec.name; x.click();
+    setTimeout(()=>URL.revokeObjectURL(url),4000);
+  }));
+  w.querySelectorAll("button[data-del]").forEach(b=>b.addEventListener("click",async()=>{
+    if(!confirm("Delete this file?"))return;
+    await dbReady; try{await idbDel(b.dataset.del);}catch(e){}
+    sc.files=sc.files.filter(f=>f.id!==b.dataset.del); save(); renderFiles();
+  }));
+}
+const drop=document.getElementById("drop"), filein=document.getElementById("filein");
+drop.addEventListener("click",()=>filein.click());
+filein.addEventListener("change",()=>{addFiles(filein.files);filein.value="";});
+["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
+drop.addEventListener("drop",e=>addFiles(e.dataTransfer.files));
+
+// ---------- export / import ----------
+const b64=buf=>{let s="";const u=new Uint8Array(buf);for(let i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);};
+const unb64=s=>{const bin=atob(s);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer;};
+document.getElementById("exportbtn").addEventListener("click",async()=>{
+  await dbReady;
+  const files=await idbAll().catch(()=>[]);
+  const out={app:"GradSchoolBlueprint",version:1,exported:new Date().toISOString(),state,files:[]};
+  for(const f of files){ out.files.push({id:f.id,name:f.name,type:f.type,size:f.size,ts:f.ts,data:b64(await f.blob.arrayBuffer())}); }
+  const blob=new Blob([JSON.stringify(out)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="gradschoolblueprint-backup-"+new Date().toISOString().slice(0,10)+".json"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+});
+document.getElementById("importbtn").addEventListener("click",()=>document.getElementById("importfile").click());
+document.getElementById("importfile").addEventListener("change",async ev=>{
+  const f=ev.target.files[0]; if(!f) return;
+  try{
+    const data=JSON.parse(await f.text());
+    if(data.app!=="GradSchoolBlueprint"||!data.state) throw 0;
+    if(!confirm("Import this backup? It replaces what's currently in this browser.")) return;
+    await dbReady;
+    for(const rec of (data.files||[])){ await idbPut({id:rec.id,name:rec.name,type:rec.type,size:rec.size,ts:rec.ts,blob:new Blob([unb64(rec.data)],{type:rec.type})}).catch(()=>{}); }
+    state=data.state; save(); renderAll();
+  }catch(e){ alert("That doesn't look like a Grad School Blueprint backup file."); }
+  ev.target.value="";
+});
+
+// ---------- add school dialog ----------
+const dlg=document.getElementById("schooldlg");
+document.getElementById("addschool").addEventListener("click",()=>{document.getElementById("sname").value="";document.getElementById("sround").value="";document.getElementById("sdate").value="";dlg.showModal();});
+document.getElementById("scancel").addEventListener("click",()=>dlg.close());
+document.getElementById("screate").addEventListener("click",()=>{
+  const name=document.getElementById("sname").value.trim(); if(!name) return;
+  const round=document.getElementById("sround").value.trim(), d=document.getElementById("sdate").value;
+  const s={id:uid(),name:name+(round?" · "+round:""),deadlines:[],tasks:[],essays:[],files:[]};
+  if(d) s.deadlines.push({id:uid(),label:"Application deadline",date:d,hero:true});
+  state.schools.push(s); state.active=s.id; save(); dlg.close(); renderAll();
+});
+
+// ---------- tabs ----------
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  ["dash","essays","files"].forEach(t=>document.getElementById("tab-"+t).style.display=(b.dataset.tab===t?"":"none"));
+  if(b.dataset.tab==="files") renderFiles();
+}));
+
+function renderAll(){ renderSchools(); if(state.active){ renderDash(); renderEssays(); renderFiles(); } }
+renderAll();
+</script>
+</body>
+</html>

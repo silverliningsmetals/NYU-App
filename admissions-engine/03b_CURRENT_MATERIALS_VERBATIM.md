@@ -45,23 +45,24 @@ Second, the entrepreneurial work behind my test waiver request. Outside the Mari
 
 ---
 
-## D. Test-Waiver Statement (~198 words; 300 limit, bullets ok)
+## D. Test-Waiver Statement — LIVE (Google Doc, synced 2026-06-28; 300 limit, bullets ok)
 
 My academic record, quantitative coursework, and analytical leadership demonstrate readiness for Stern's curriculum without a standardized test.
 
 **Academic foundation**
-- B.S. in Economics, SUNY Oneonta — 3.54 GPA, Cum Laude, Department Honors in Economics, Dean's List (6 semesters).
-- Quantitative coursework: Intermediate Microeconomic Theory (A), Intermediate Macroeconomic Theory (A), Macroeconomic Policy (A), Natural Resource Economics (A), International Trade & Economics (A−), International Finance (B), Introduction to Statistics (B+), Fundamentals of Programming (B+), Practical Computer Course (A).
+- B.S. in Economics, SUNY Oneonta: 3.54 GPA, Cum Laude, Department Honors in Economics, Dean's List (6 semesters).
+- Quantitative coursework: Intermediate Microeconomic Theory (A), Intermediate Macroeconomic Theory (A), Macroeconomic Policy (A), Natural Resource Economics (A), International Trade & Economics (A−), International Finance (B), Introduction to Statistics (B+), Fundamentals of Programming (B+).
 
 **Applied quantitative leadership**
-- Planned and executed a $13.1M, 903-asset retrograde across 7 bases; tracked each closure for stakeholders up to U.S. Central Command.
-- Cut a logistics process 81% (21 days → 4); reconciled a $250K, 2,000-item account to zero discrepancy; managed a $6.1M deployment budget enabling 108 operations across 5 countries.
-- Built a real-time logistics dashboard modeling data across 21 countries, adopted as the command's daily decision tool.
+- Planned and executed a $13.1M, 903-item equipment retrograde that set the conditions for closing seven forward bases, tracked end to end and reported to U.S. Central Command.
+- Brokered a five-party Key Leader Engagement, up to the Iraqi special operations commander, that cut cargo-movement request times 81% (21 days to 4) and secured escorted ground transport across Iraq.
+- Built a real-time logistics dashboard on Palantir, modeling data across 21 countries and adopted as the command's daily decision tool.
+- On a separate Pacific deployment, managed a $6.1M budget that enabled 108 operational activities across five countries.
 
 **Self-directed technical work**
-- Founded Silverlinings Metals — designed the pricing and product-comparison logic and wrote the code that runs it, applying quantitative reasoning to a live market.
+- Founded Silverlinings Metals: designed the pricing and product-comparison logic, applying quantitative reasoning to a live market.
 
-A standardized test would add no information that my transcript, my analytical track record, and my self-directed quantitative work do not already provide.
+> *Note vs. prior version: dropped "Practical Computer Course (A)" and the closing "a standardized test would add no information…" line; added Palantir + the escorted-transport detail. **You have ~80 words of headroom** — consider restoring the closing line (it's a strong mic-drop) and, if you want, re-adding "wrote the code that runs it" to the Silverlinings bullet (the self-coded angle is a differentiator).*
 
 ---
 
@@ -88,5 +89,13 @@ A standardized test would add no information that my transcript, my analytical t
 
 ---
 
-## G. Resume — one-page, Stern (upgraded, submission-ready)
-See `NYU App/Degnan_Ryan_Resume_NYU_Stern_OnePage_Upgraded.docx`. Civilian-translated, fully quantified; USMC (Captain) 2021–2027 with three billets + Silverlinings founder block + SUNY Oneonta education + leadership/community + awards (JCOMM, JSAM, NAM) + active Secret clearance.
+## G. Resume — LIVE (Google Doc, synced 2026-06-28)
+
+The live resume is **ahead of the `.docx`** and is a strong one-pager (NOT the consulting/ATS format — correct for the application). Key content now in it:
+- **Jordan (4 bullets):** Palantir dashboard (flights / base re-posturing / vehicle readiness / supply routes / diplomatic clearances, 21 countries); $13.1M retrograde of 903 pieces (cost + footprint); **authored the MERV withdrawal plan + tracked all 7 base closures end-to-end to CENTCOM**; brokered five-party agreement (81%, 21→4, escorted transport).
+- **CLB-11:** $6.1M / 108 activities / 5 countries, resourcing the **largest Koa Moana expansion to date (199 personnel)** to counter China's influence; $250K / 2,000-item account to zero; most combat-ready in 1st MLG.
+- **Silverlinings:** designed + built the price-comparison platform while serving full time.
+- **Leadership & Community:** **PFM Officer — counseled 300+ Marines 1-on-1 + built a personal-finance app** (statement analysis, compound-interest + mortgage calculators); welcome-aboard package; mentorship.
+- **Additional:** Awards (JCOMM/JSAM/NAM); Skills; Systems (GCSS-MC + founder-level web/app dev); Personal (Secret clearance, Italian, welding, precious-metals markets, lacrosse).
+
+> **Watch: length.** Jordan now has 4 bullets + the new PFM bullet — confirm it still fits **one page**. Worth folding in from the merged draft (`drafts/Resume_NYU_Stern_FINAL.md`): the **$750K disposition**, the verb **"Negotiated,"** and fill the **LinkedIn URL**. The live resume already has Palantir / MERV / PFM that the merge lacked, so it is the better base — see reconciliation note in that draft.

@@ -1,5 +1,14 @@
 # Resume — NYU Stern application (MERGED FINAL content)
 
+> ⚠️ **SUPERSEDED as the base (2026-06-28).** Ryan's **live [Google Doc resume](https://docs.google.com/document/d/1i9Kwt4KW9V2aqVYRHHUnuxI1xYVkklml6EhmPFSU6zU/edit)
+> is the source of truth** — it already has stronger content this draft lacked (Palantir dashboard detail,
+> the MERV withdrawal-plan bullet, the **PFM Officer / personal-finance app** community bullet, the 199-person
+> Koa Moana expansion). **Don't replace the live doc with this one.** Instead, apply only these 3 deltas from
+> below into the live doc: (1) add **"dispositioned $750K of excess"** to the retrograde bullet; (2) use the
+> verb **"Negotiated"** (not "Brokered"); (3) fill the **LinkedIn URL**. Then confirm it stays **one page**
+> (Jordan's 4 bullets + the new PFM bullet may push length — tighten if needed). The content below is kept for
+> reference only.
+
 **Use this for the Stern application.** It takes the `Resume_NYU_Stern_OnePage_Upgraded` structure (experience-led,
 keeps the Leadership & Community section that feeds Stern's IQ+EQ/character lens) and grafts in the **stronger
 bullets and verbs from `Resume_Consulting_Upgraded`** — *without* the recruiting-style Summary blurb or Core

@@ -2,7 +2,14 @@
 
 > Canonical, structured profile distilled from the full NYU-App working set (resume, essays v5,
 > EQ packet, test-waiver kit, S2S intake, strategy memo, Pick Six). This is the **input the Stern
-> AdCom predictor scores**. Last built: 2026-06-28. Keep in sync with the latest `.docx` versions.
+> AdCom predictor scores**. Last built: 2026-06-28. Keep in sync with the latest versions.
+
+> **LIVE SUBMISSION SOURCES (synced 2026-06-28):** Ryan's actual submission versions now live in Google Docs
+> — [Test Waiver](https://docs.google.com/document/d/18d3xZpMouB4CpTNZh7b-gzUylDoH17ZoYiex2OVoq8M/edit),
+> [Resume](https://docs.google.com/document/d/1i9Kwt4KW9V2aqVYRHHUnuxI1xYVkklml6EhmPFSU6zU/edit),
+> [S2S Intake](https://docs.google.com/document/d/1ru4xympBXDvh2_X6H6-YQGlb98iuI50SI1mf-U7W55A/edit). These
+> are ahead of the `.docx` files and added several assets (Palantir, PFM Officer / personal-finance app,
+> the MERV withdrawal plan, $750K/30% footprint, 199-person Koa Moana). Reflected below.
 
 ---
 
@@ -32,13 +39,13 @@
 - Authored mid-year budget review surfacing an equipment shortfall → triggered a Marine Forces Reserve procurement action (one unit's fix → force-wide capability).
 
 **Logistics Current-Operations Officer, U.S.-led Coalition SOF Task Force (CSOJTF-Central) — Jordan (2025)**
-- Built a **real-time logistics dashboard spanning 21 countries**, adopted as the command's daily decision tool for senior leaders (the "COP" / Common Operating Picture layer).
-- Directed a **$13.1M drawdown of 903 assets across 7 forward bases** in Iraq/N. Syria; tracked each closure end-to-end up to U.S. Central Command.
-- **Brokered a multi-party agreement cutting transport-request time 81% (21→4 days)**; recovered a **$592K** unaccounted-equipment cache.
+- Built the command's **real-time logistics dashboard on Palantir** (flights, base re-posturing, vehicle readiness, supply routes, diplomatic clearances) **across 21 countries**, adopted as senior leaders' daily decision tool. *(NEW: the platform is **Palantir** — a strong, specific, consulting/tech-credible detail.)*
+- **Authored the withdrawal plan for SOF leaving the Middle Euphrates River Valley (MERV)** and directed a **$13.1M retrograde of 903 assets across 7 forward base closures**, tracked end-to-end up to U.S. Central Command, cutting cost and the force's logistical footprint (**30% / ~$750K excess dispositioned**). *(NEW: the MERV withdrawal-plan authorship + the 30%/$750K footprint figure.)*
+- **Brokered a five-party Key Leader Engagement, up to the Iraqi SOF commander**, cutting cargo-movement request time 81% (21→4 days) and securing escorted ground transport across Iraq; recovered a **$592K, 128-item** unaccounted-equipment cache.
 - Was J4 Night Watch Officer during a 12-day Israel-Iran conflict window (composure-under-pressure story).
 
 **Supply Officer, Combat Logistics Battalion 11 — Indo-Pacific, Operation Koa Moana (2023–2024)**
-- Owned end-to-end supply/contracting for a **5-country, $6.1M deployment enabling 108 operations**.
+- Owned end-to-end supply/contracting for a **5-country, $6.1M deployment enabling 108 operational activities**, resourcing the **largest Koa Moana expansion to date (199 personnel)** to counter China's influence in the Pacific. *(NEW: the 199-person expansion + the strategic "counter China" framing.)*
 - Reconciled a **$250K, 2,000-item account to zero discrepancy**; unit assessed **most combat-ready in 1st Marine Logistics Group**.
 
 **Awards:** Joint Service Commendation Medal (JCOMM); Joint Service Achievement Medal (JSAM); Navy & Marine Corps Achievement Medal. Active U.S. Secret clearance.
@@ -50,6 +57,7 @@
 
 ## 4. Leadership / character / EQ assets
 - **Col Timothy W. Johnson (USA, J4 Director, CSOJTF-Central)** — former (not current) supervisor; signed both end-of-tour citations; **EQ endorser.** Origin of Ryan's "leader decides what kind of day his people have / chose kindness" model.
+- **Personal Financial Management Officer (18+ months, two units) — NEW, high-value asset.** The mandatory check-in/out counselor; sat 1-on-1 with **300+ Marines** on budgeting/debt/saving, and **built a personal-finance app** (bank-statement analysis, compound-interest + mortgage calculators) to make the lessons stick. *Same "see a problem → build the fix for regular people" instinct as Silverlinings — a second self-built app, plus a people-first/service/financial-literacy EQ story. Strengthens IQ+EQ (Dim 6), differentiation (Dim 8), and leadership/community (Dim 7). Strong Pick Six / EQ / essay material.*
 - **Welcome-aboard onboarding package** — wrote the unit's unwritten knowledge down; given to every new arrival (unit turns over ~10% at a time); a "pay-it-forward" EQ story rooted in watching Col J.
 - Mentors junior Marines (incl. from outside his chain) on promotions/schools/transition.
 - Led a conditioning hike collecting **313 lbs of food** for a local pantry.
